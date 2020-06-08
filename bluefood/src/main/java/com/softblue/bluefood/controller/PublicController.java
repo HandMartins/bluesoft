@@ -23,6 +23,7 @@ public class PublicController {
 
         Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
+        ControllerHelper.setEditMode(model,false);
         return "cliente-cadastro";
     }
 
