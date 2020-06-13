@@ -17,12 +17,12 @@ import javax.validation.constraints.Pattern;
 public class Cliente extends Usuario {
 
     @NotBlank(message = "O CPF não pode ser vazio")
-    @Pattern(regexp = "[0-9]{11}")
+    @Pattern(regexp = "[0-9]{11}", message = "O CPF deve ter 11 caracteres")
     @Column(length = 11, nullable = false)
     private String cpf;
 
     @NotBlank(message = "O CEP não pode ser vazio")
-    @Pattern(regexp = "[0-9]{8}")
+    @Pattern(regexp = "[0-9]{8}", message = "O CEP deve ter 8 caracteres")
     @Column(length = 8)
     private String cep;
 
