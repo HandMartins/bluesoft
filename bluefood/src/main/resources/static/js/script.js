@@ -4,7 +4,7 @@ function isNumberKey(evt){
     //identificando o navegador e suas propriedades
     var charCode = (evt.which) ? evt.which : evt.keyCode
 
-    //Verificando pela tabela ASCII as teclas possíveis para ser digitado
+    //Verificando pela tabela ASCII as teclas possíveis para ser digitado e teclado numérico
     if((charCode >= 48 && charCode <= 57) || charCode <= 31 || charCode >= 96 && charCode <= 105){
         return true;
     }

@@ -2,6 +2,7 @@ package com.softblue.bluefood.controller;
 
 
 import com.softblue.bluefood.application.ClienteService;
+import com.softblue.bluefood.application.ValidationException;
 import com.softblue.bluefood.domain.cliente.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,12 +32,16 @@ public class PublicController {
     }
 
     @PostMapping("/cliente/save")
-    public String saveCliente(@ModelAttribute("cliente") @Valid Cliente cliente,
-                              Errors errors,
-                              Model model){
+    public String saveCliente(@ModelAttribute("cliente") @Valid Cliente cliente, Errors errors, Model model){
+
         if(!errors.hasErrors()){
-            clienteService.saveCliente(cliente);
-            model.addAttribute("msg", "Cliente gravado com sucesso");
+            try {
+                clienteService.saveCliente(cliente);
+                model.addAttribute("msg", "Cliente gravado com sucesso");
+            }catch (ValidationException e){
+                errors.rejectValue("email", null, e.getMessage());  //repassando a mensagem de erro la do clienteService ao tentar salvar com o método saveCliente
+            }
+
         }
 
         ControllerHelper.setEditMode(model,false);
